@@ -41,11 +41,11 @@ export function WinCard() {
   }
 
   return (
-    <div className="w-full rounded-xl bg-surface p-6 paper-shadow">
+    <div className="w-full rounded-xl bg-surface p-5 paper-shadow sm:p-6">
       <p className="text-2xs font-medium tracking-label text-muted uppercase">
         Tablero cerrado
       </p>
-      <h2 className="font-display mt-1 text-3xl text-ink">Completado</h2>
+      <h2 className="font-display mt-1 text-2xl text-ink sm:text-3xl">Completado</h2>
       <div className="mt-4 flex items-end justify-between gap-4 border-b border-line pb-4">
         <div>
           <p className="text-xs text-subtle">Tiempo</p>
@@ -80,6 +80,7 @@ export function WinCard() {
             value={nick}
             maxLength={16}
             autoComplete="nickname"
+            enterKeyHint="done"
             placeholder="Tu alias"
             onChange={(e) => setNick(e.target.value)}
             required

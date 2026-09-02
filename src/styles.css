@@ -74,6 +74,8 @@
   --scale-25: 25%;
   --scale-96: 96%;
   --duration-250: 250ms;
+  --size-play-pad: 16rem;
+  --size-board-max: 36rem;
 }
 
 @layer base {
@@ -133,8 +135,106 @@
   box-shadow: var(--shadow-paper);
 }
 
+.washi-veil {
+  opacity: 0.18;
+}
+
 .page-shell {
   padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+}
+
+.page-shell-play {
+  padding-top: max(0.5rem, env(safe-area-inset-top));
+  padding-bottom: 0;
+}
+
+.play-layout {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+.play-header {
+  min-width: 0;
+}
+
+.board-slot {
+  container-type: size;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 0;
+  position: relative;
+}
+
+.sudoku-board {
+  width: min(100cqw, 100cqh);
+  aspect-ratio: 1 / 1;
+}
+
+.pad-slot {
+  min-width: 0;
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+@media (min-width: 1024px) {
+  .play-layout {
+    grid-template-columns: minmax(0, 1fr) var(--size-play-pad);
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  .play-header {
+    grid-column: 1 / -1;
+  }
+
+  .board-slot {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .pad-slot {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: center;
+    padding-bottom: 0;
+  }
+
+  .sudoku-board {
+    width: min(100cqw, 100cqh, var(--size-board-max));
+  }
+}
+
+@media (orientation: landscape) and (max-width: 1023px) {
+  .play-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(11rem, 38%);
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 0.5rem 0.75rem;
+  }
+
+  .play-header {
+    grid-column: 1 / -1;
+  }
+
+  .board-slot {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .pad-slot {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: center;
+    padding-bottom: max(0.25rem, env(safe-area-inset-bottom));
+  }
+
+  .pad-nums {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .screen-enter {

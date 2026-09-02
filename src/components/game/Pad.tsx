@@ -20,8 +20,8 @@ export function Pad() {
   const locked = won || generating;
 
   return (
-    <div className="flex w-full flex-col gap-3">
-      <div className="grid grid-cols-9 gap-1 lg:grid-cols-3 lg:gap-1.5">
+    <div className="flex w-full min-w-0 flex-col gap-2 sm:gap-3">
+      <div className="pad-nums grid grid-cols-9 gap-1 lg:grid-cols-3 lg:gap-1.5">
         {Array.from({ length: 9 }, (_, n) => {
           const d = n + 1;
           const left = 9 - (counts[d] ?? 0);
@@ -32,10 +32,11 @@ export function Pad() {
               disabled={locked}
               onClick={() => inputDigit(d)}
               className={cn(
-                "flex min-h-11 flex-col items-center justify-center rounded-md bg-surface paper-shadow",
-                "aspect-square text-lg font-medium tabular-nums transition-[transform,background-color,color,opacity] duration-150 ease-[var(--ease-smooth-out)]",
+                "flex min-h-12 min-w-0 flex-col items-center justify-center rounded-md bg-surface paper-shadow",
+                "touch-manipulation text-lg font-medium tabular-nums transition-[transform,background-color,color,opacity] duration-150 ease-[var(--ease-smooth-out)]",
                 "hover:bg-selected active:scale-96",
                 "disabled:opacity-40",
+                "lg:aspect-square lg:min-h-11",
                 notesMode ? "text-muted" : "text-entry",
                 left === 0 && "opacity-35",
               )}
@@ -56,7 +57,7 @@ export function Pad() {
           variant={notesMode ? "default" : "outline"}
           disabled={locked}
           onClick={toggleNotes}
-          className="h-11 flex-col gap-0.5 px-1 text-2xs sm:text-xs"
+          className="h-12 min-w-0 flex-col gap-0.5 px-1 text-2xs sm:h-11 sm:text-xs"
           aria-pressed={notesMode}
         >
           <Pencil className="size-4" />
@@ -67,7 +68,7 @@ export function Pad() {
           variant="outline"
           disabled={locked}
           onClick={erase}
-          className="h-11 flex-col gap-0.5 px-1 text-2xs sm:text-xs"
+          className="h-12 min-w-0 flex-col gap-0.5 px-1 text-2xs sm:h-11 sm:text-xs"
         >
           <Eraser className="size-4" />
           Borrar
@@ -77,7 +78,7 @@ export function Pad() {
           variant="outline"
           disabled={locked || historyIndex <= 0}
           onClick={undo}
-          className="h-11 flex-col gap-0.5 px-1 text-2xs sm:text-xs"
+          className="h-12 min-w-0 flex-col gap-0.5 px-1 text-2xs sm:h-11 sm:text-xs"
         >
           <Undo2 className="size-4" />
           Deshacer
@@ -87,7 +88,7 @@ export function Pad() {
           variant="outline"
           disabled={locked}
           onClick={hint}
-          className="h-11 flex-col gap-0.5 px-1 text-2xs sm:text-xs"
+          className="h-12 min-w-0 flex-col gap-0.5 px-1 text-2xs sm:h-11 sm:text-xs"
         >
           <Lightbulb className="size-4" />
           Pista
@@ -99,12 +100,12 @@ export function Pad() {
         variant="secondary"
         disabled={locked}
         onClick={pause}
-        className="hidden sm:inline-flex"
+        className="hidden lg:inline-flex"
       >
         <Pause className="size-4" />
         Pausar
       </Button>
-      <p className="hidden text-center text-xs text-subtle sm:block">
+      <p className="hidden text-center text-xs text-subtle lg:block">
         Cada pista suma 20 s al cronómetro.
       </p>
     </div>

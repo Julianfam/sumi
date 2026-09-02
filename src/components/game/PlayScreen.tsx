@@ -21,8 +21,8 @@ export function PlayScreen() {
   const meta = DIFFICULTY_META[difficulty];
 
   return (
-    <div className="screen-enter relative mx-auto flex w-full max-w-5xl flex-col gap-5">
-      <header className="flex items-center gap-2">
+    <div className="play-layout screen-enter relative">
+      <header className="play-header flex items-center gap-2">
         <Button
           type="button"
           variant="ghost"
@@ -45,7 +45,7 @@ export function PlayScreen() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <div className="timer-chip rounded-md bg-surface px-3 py-1.5">
+          <div className="timer-chip rounded-md bg-surface px-2.5 py-1 sm:px-3 sm:py-1.5">
             <Timer className="font-display text-xl tabular-nums text-ink sm:text-2xl" />
           </div>
           {!won ? (
@@ -53,7 +53,7 @@ export function PlayScreen() {
               type="button"
               variant="ghost"
               size="icon-sm"
-              className="sm:hidden"
+              className="lg:hidden"
               onClick={paused ? resume : pause}
               aria-label={paused ? "Reanudar" : "Pausar"}
             >
@@ -78,24 +78,16 @@ export function PlayScreen() {
         </div>
       </header>
 
-      <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,1fr)_16rem]">
-        <div className="relative">
-          <Board />
-          {generating ? (
-            <div className="absolute inset-0 z-10 flex items-center justify-center rounded-xl bg-bg/40">
-              <p className="rounded-lg bg-surface px-4 py-2 text-sm paper-shadow">
-                <span className="shimmer-text">Componiendo un tablero único</span>
-              </p>
-            </div>
-          ) : null}
-        </div>
-        <div className="lg:sticky lg:top-6">
-          <Pad />
-        </div>
+      <div className="board-slot">
+        <Board />
+      </div>
+
+      <div className="pad-slot">
+        <Pad />
       </div>
 
       {paused ? (
-        <div className="overlay-fog absolute inset-0 z-20 flex items-center justify-center rounded-xl bg-bg/80 px-4">
+        <div className="overlay-fog absolute inset-0 z-20 flex items-center justify-center bg-bg/80 px-4">
           <div className="overlay-panel flex w-full max-w-xs flex-col items-center gap-4 rounded-xl bg-surface p-6 text-center paper-shadow">
             <p className="font-display text-2xl text-ink">Pausa</p>
             <p className="text-sm leading-relaxed text-muted">
@@ -114,8 +106,8 @@ export function PlayScreen() {
       ) : null}
 
       {won ? (
-        <div className="overlay-fog absolute inset-0 z-20 flex items-end justify-center bg-bg/55 px-3 py-4 sm:items-center">
-          <div className="overlay-panel w-full max-w-md">
+        <div className="overlay-fog absolute inset-0 z-20 flex items-end justify-center overflow-y-auto bg-bg/55 px-3 py-3 sm:items-center sm:py-4">
+          <div className="overlay-panel my-auto w-full max-w-md">
             <WinCard />
           </div>
         </div>

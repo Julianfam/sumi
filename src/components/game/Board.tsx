@@ -5,7 +5,7 @@ import { useGame } from "@/lib/sudoku/store";
 
 function Notes({ mask }: { mask: number }) {
   return (
-    <div className="grid h-full w-full grid-cols-3 grid-rows-3 p-0.5">
+    <div className="grid h-full w-full grid-cols-3 grid-rows-3 p-px">
       {Array.from({ length: 9 }, (_, n) => {
         const d = n + 1;
         const on = (mask & (1 << d)) !== 0;
@@ -60,7 +60,7 @@ export function Board() {
       aria-rowcount={9}
       aria-colcount={9}
       className={cn(
-        "relative mx-auto aspect-square w-full max-w-xl select-none rounded-xl bg-surface p-2 paper-shadow",
+        "sudoku-board relative select-none rounded-xl bg-surface p-1.5 paper-shadow sm:p-2",
         generating && "pointer-events-none",
       )}
     >
@@ -92,7 +92,7 @@ export function Board() {
               disabled={won}
               onClick={() => select(i)}
               className={cn(
-                "relative flex items-center justify-center bg-surface text-lg leading-none sm:text-xl",
+                "relative flex min-h-0 min-w-0 items-center justify-center bg-surface text-base leading-none sm:text-xl",
                 "touch-manipulation transition-[background-color,color,box-shadow] duration-150 ease-[var(--ease-smooth-out)]",
                 given ? "font-semibold text-ink" : "font-medium text-entry",
                 isPeer && !isSel && "bg-peer",
@@ -129,6 +129,13 @@ export function Board() {
           );
         })}
       </div>
+      {generating ? (
+        <div className="absolute inset-0 z-10 flex items-center justify-center rounded-xl bg-bg/40">
+          <p className="rounded-lg bg-surface px-4 py-2 text-sm paper-shadow">
+            <span className="shimmer-text">Componiendo un tablero único</span>
+          </p>
+        </div>
+      ) : null}
     </div>
   );
 }

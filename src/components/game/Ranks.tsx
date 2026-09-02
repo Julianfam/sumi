@@ -104,9 +104,9 @@ export function Ranks() {
       </header>
 
       <Tabs defaultValue={difficulty}>
-        <TabsList>
+        <TabsList className="grid h-11 w-full grid-cols-4">
           {DIFFICULTIES.map((d) => (
-            <TabsTrigger key={d} value={d}>
+            <TabsTrigger key={d} value={d} className="min-w-0 px-1 text-2xs sm:text-xs">
               {DIFFICULTY_META[d].label}
             </TabsTrigger>
           ))}
