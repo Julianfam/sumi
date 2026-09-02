@@ -1,0 +1,15 @@
+node_modules/
+.vercel/
+screenshots/
+artifacts/
+*.log
+.DS_Store
+.grok/skills/
+.grok/references/
+.grok/status
+.grok/preview.log
+.grok/favicon*
+.grok/favicon-preview.html
+AGENTS.md
+.env
+.env.*
